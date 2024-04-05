@@ -26,10 +26,10 @@ jobs:
 
       - name: Transform for Smartdns
         run: |
-          sed 's#^full:#-.#' direct.txt   > temp-direct.txt
-          sed 'd#^regexp:#' temp-direct.txt  > ./publish/direct_list.txt
-          sed 's#^full:#-.#' proxy.txt > temp-proxy.txt
-          sed 'd#^regexp:#' temp-proxy.txt  > ./publish/proxy_list.txt
+          sed 's/full:/-./' direct.txt   > temp-direct.txt
+          sed 'd/regexp:/' temp-direct.txt  > ./publish/direct.txt
+          sed 's/full:/-./' proxy.txt > temp-proxy.txt
+          sed 'd/regexp:/' temp-proxy.txt  > ./publish/proxy.txt
 
       - name: Upload To Artifact
         uses: actions/upload-artifact@v3
@@ -37,13 +37,6 @@ jobs:
           name: list
           path: |
             *
-
-      - name: Generate sha256sum
-        working-directory: publish
-        run: |
-          for i in $(ls *.txt); do
-            sha256sum $i > $i.sha256sum
-          done
 
       - name: Release and Upload Assets
         uses: ncipollo/release-action@v1
@@ -56,4 +49,3 @@ jobs:
           removeArtifacts: true
           artifacts: |
             publish/*.txt
-            publish/*.txt.sha256sum
