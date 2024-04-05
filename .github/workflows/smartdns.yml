@@ -31,13 +31,6 @@ jobs:
           sed 's/full:/-./' proxy.txt > temp-proxy.txt
           sed 'd/regexp:/' temp-proxy.txt  > ./publish/proxy.txt
 
-      - name: Upload To Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: list
-          path: |
-            *
-
       - name: Release and Upload Assets
         uses: ncipollo/release-action@v1
         with:
