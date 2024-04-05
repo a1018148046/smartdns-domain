@@ -27,9 +27,9 @@ jobs:
       - name: Transform for Smartdns
         run: |
           sed 's#^full:#-.#' direct.txt   > temp-direct.txt
-          sed 'd#^regexp:#' temp-direct.txt  > ./publish/direct.txt
+          sed 'd#^regexp:#' temp-direct.txt  > ./publish/direct_list.txt
           sed 's#^full:#-.#' proxy.txt > temp-proxy.txt
-          sed 'd#^regexp:#' temp-proxy.txt  > ./publish/proxy.txt
+          sed 'd#^regexp:#' temp-proxy.txt  > ./publish/proxy_list.txt
 
       - name: Upload To Artifact
         uses: actions/upload-artifact@v3
