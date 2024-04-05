@@ -24,10 +24,12 @@ jobs:
           curl -sSL ${CUSTOM_DIRECT} -o direct.txt
           curl -sSL ${CUSTOM_PROXY} -o proxy.txt
 
-      - name: Transform "full:" suit for Smartdns
+      - name: Transform for Smartdns
         run: |
-          sed 's#^full:#-.#' direct.txt > ./publish/direct_list.txt
-          sed 's#^full:#-.#' proxy.txt > ./publish/proxy_list.txt
+          sed 's#^full:#-.#' direct.txt 
+          sed 'd#^regexp:#' direct.txt  > ./publish/direct.txt
+          sed 's#^full:#-.#' proxy.txt
+          sed 'd#^regexp:#' proxy.txt  > ./publish/proxy.txt
 
       - name: Upload To Artifact
         uses: actions/upload-artifact@v3
